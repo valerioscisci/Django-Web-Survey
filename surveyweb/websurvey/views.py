@@ -23,7 +23,7 @@ def check_key(request):
     response_data = {}
 
     try:
-        AccessCode = surveyauth.objects.get(key=QueryDict(request.body).get('key'))
+        AccessCode = surveyauth.objects.get(key=QueryDict(request.body).get('key'), survey=QueryDict(request.body).get('survey'))
     except surveyauth.DoesNotExist:
         AccessCode = "fail"
 
