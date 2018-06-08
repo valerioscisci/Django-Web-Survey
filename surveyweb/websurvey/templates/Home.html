@@ -1,0 +1,292 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{% block title %}Web Surveys - t33{% endblock title %}</title>
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.4.min.js"></script>
+        <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/87EE9672-694C-4E4A-AE35-387C9A2BC17C/main.js" charset="UTF-8"></script>
+        <script type="text/javascript" src="{% static 'websurvey/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'websurvey/js/cookieconsent.min.js' %}"></script>
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Droid+Serif" />
+        <link rel="stylesheet" type="text/css" href="{% static 'websurvey/css/style.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'websurvey/css/cookieconsent.min.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'websurvey/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'websurvey/css/bootstrap-theme.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'websurvey/css/font-awesome.min.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'websurvey/css/ionicons.min.css' %}" />
+        {% block css %}{% endblock css %}
+        <script>
+            //script for cookie agreement
+            window.addEventListener("load", function(){
+            window.cookieconsent.initialise({
+              "palette": {
+                "popup": {
+                  "background": "#eaf7f7",
+                  "text": "#5c7291"
+                },
+                "button": {
+                  "background": "#56cbdb",
+                  "text": "#ffffff"
+                }
+              },
+                "content": {
+                    "href": "https://www.t33.it/en/cookie-policy.html",
+                    "message": "This website uses cookies to ensure you get the best experience on our website.",
+                    "dismiss": "Got it!",
+                    "allow": "Allow cookies",
+                    "deny": "Decline",
+                    "link": "Learn more"
+                }
+            })});
+        </script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42195654-54"></script>
+        <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', 'UA-42195654-54');
+        </script>
+    </head>
+    <body>
+        <div id="main-wrap">
+            <header id="header" class="fixed">
+                <nav class="navbar navbar-default">
+                    <div id="logo">
+                        <a class="navbar-brand" target="_blank" href="https://www.t33.it/en/default.html">
+                            <img alt="t33" class="normal" src="{% static 'websurvey/img/logo.png' %}" />
+                        </a>
+                    </div>
+                    <div id="menu">
+                        <div class="menu-holder">
+                            <ul>
+                                <li><a href="{% url 'home' %}">Home</a></li>
+                                <li><a href="{% url 'home' %}#active">Active</a></li>
+                                <li><a href="{% url 'home' %}#ended">Ended</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+            <div class="container">
+                <div class="head row-fluid">
+                    <div class="col-md-12 separation"></div>
+                </div>
+                {% block content %}
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="bg-img" data-responsive="child-height" data-responsive-id="about">
+                            <img alt="questionnaire" class="img-responsive" src="{% static 'websurvey/img/questionnaire.png' %}" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text" data-responsive="parent-height" data-responsive-id="about">
+                            <div class="">
+                                <h3 class="big">Web Survey Service</h3>
+                                <p class="heading left">
+                                    This is the t33 web service dedicated to <strong>data gathering</strong> and <strong>questionnaires</strong>.<br/><br/>
+                                    You can check active questionnaires after this section and you can consult old ones at the bottom of this page.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 separation"></div>
+                </div>
+                <div class="row grey-background">
+                    <div class="col-md-6">
+                        <div class="text" data-responsive="parent-height" data-responsive-id="about">
+                            <div>
+                                <span id="active" class="anchor"></span>
+                                <h3 class="big color">Active Surveys</h3>
+                                <p class="left">
+                                    You can find here the list of <strong>active surveys</strong> divided in different sections.<br/><br/>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 survey-box">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="alt-survey"><img class="img-responsive" alt="FCE_Logo" class="normal" src="{% static 'websurvey/img/FCE_Logo.jpg' %}" />
+
+                                    <div class="survey text-center">
+                                        <h4 class="heading color">European funding for cooperation projects in the Channel area</h4>
+
+                                        <div class="list-group">
+                                            <a href="{% url 'crossborder' %}" class="list-group-item list-group-item-action">CROSS BORDER COOPERATION</a>
+                                            <a href="{% url 'home' %}#active" class="list-group-item list-group-item-action list-group-item-info">survey test</a>
+                                            <a href="{% url 'home' %}#active" class="list-group-item list-group-item-action">survey test</a>
+                                            <a href="{% url 'home' %}#active" class="list-group-item list-group-item-action list-group-item-info">survey test</a>
+                                        </div>
+
+                                        <p><a class="btn-alt active shadow small margin-null" target="_blank" href="https://www.channelmanche.com/">READ MORE ABOUT FCE</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="alt-survey text-center"><img class="img-responsive" alt="FCE_Logo" class="normal" src="http://www.ville-croix.fr/var/ptic/storage/images/media/caroussel-page-d-accueil/image-test-1/96100-1-fre-FR/Image-test-1_large.jpg" />
+
+                                    <div class="survey text-center">
+                                        <h4 class="heading color">Test Section</h4>
+
+                                        <div class="list-group">
+                                            <a href="{% url 'home' %}#active" class="list-group-item list-group-item-action">survey test</a>
+                                            <a href="{% url 'home' %}#active" class="list-group-item list-group-item-action list-group-item-info">survey test</a>
+                                            <a href="{% url 'home' %}#active" class="list-group-item list-group-item-action">survey test</a>
+                                            <a href="{% url 'home' %}#active" class="list-group-item list-group-item-action list-group-item-info">survey test</a>
+                                        </div>
+
+                                        <p><a class="btn-alt active shadow small margin-null" target="_blank" href="{% url 'home' %}#active">READ MORE ABOUT TEST</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 separation"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="text" data-responsive="parent-height" data-responsive-id="about">
+                            <div>
+                                <span id="ended" class="anchor"></span>
+                                <h3 class="big color-red">Ended Surveys</h3>
+                                <p class="heading left">
+                                    You can see  the list of <strong>ended surveys</strong> divided in different sections by clicking the button.<br/><br/>
+                                    <button class="btn btn-danger">Show List</button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="endedsurveys" class="row">
+                    <div class="col-md-12 survey-box">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="alt-survey text-center"><img class="img-responsive" alt="FCE_Logo" class="normal" src="http://www.ville-croix.fr/var/ptic/storage/images/media/caroussel-page-d-accueil/image-test-1/96100-1-fre-FR/Image-test-1_large.jpg" />
+
+                                    <div class="survey text-center">
+                                        <h4 class="heading color-red">Test Section</h4>
+
+                                        <div class="list-group">
+                                            <a href="{% url 'home' %}#ended" class="list-group-item list-group-item-action">survey test</a>
+                                            <a href="{% url 'home' %}#ended" class="list-group-item list-group-item-action list-group-item-danger">survey test</a>
+                                            <a href="{% url 'home' %}#ended" class="list-group-item list-group-item-action">survey test</a>
+                                            <a href="{% url 'home' %}#ended" class="list-group-item list-group-item-action list-group-item-danger">survey test</a>
+                                        </div>
+
+                                        <p><a class="btn-alt active shadow small margin-null color-red" target="_blank" href="{% url 'home' %}#ended">READ MORE ABOUT TEST</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="alt-survey text-center"><img class="img-responsive" alt="FCE_Logo" class="normal" src="http://www.ville-croix.fr/var/ptic/storage/images/media/caroussel-page-d-accueil/image-test-1/96100-1-fre-FR/Image-test-1_large.jpg" />
+
+                                    <div class="survey text-center">
+                                        <h4 class="heading color-red">Test Section</h4>
+
+                                        <div class="list-group">
+                                            <a href="{% url 'home' %}#ended" class="list-group-item list-group-item-action">survey test</a>
+                                            <a href="{% url 'home' %}#ended" class="list-group-item list-group-item-action list-group-item-danger">survey test</a>
+                                            <a href="{% url 'home' %}#ended" class="list-group-item list-group-item-action">survey test</a>
+                                            <a href="{% url 'home' %}#ended" class="list-group-item list-group-item-action list-group-item-danger">survey test</a>
+                                        </div>
+
+                                        <p><a class="btn-alt active shadow small margin-null color-red" target="_blank" href="{% url 'home' %}#ended">READ MORE ABOUT TEST</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endblock content %}
+                <div class="row">
+                    <div class="col-md-12 separation"></div>
+                </div>
+            </div>
+            <footer>
+                <div class="row">
+                    <div class="col-sm-12 col-md-3">
+                        <div class="logo">
+                            <img alt="logo" class="pull-left normal" src="{% static 'websurvey/img/logo_white.png' %}" />
+                        </div>
+                        <div class="clearfix"></div>
+                        &nbsp;
+                        <p class="grey-light">
+                            <strong style="color: #fff">t33: a &lsquo;Carbon Neutral&rsquo; company</strong>.<br />
+                            Since 2010, t33 has taken care to reduce its Carbon footprint and achieve a good level of environmental sustainability.<br />
+                            <a class="btn-pro margin-null" target="_blank" href="https://www.t33.it/en/carbon-neutral-company.html">READ MORE</a>
+                        </p>
+                    </div>
+                    <div class="col-sm-12 col-md-4">
+                        <div class="logo">
+                            <img class="pull-left" src="{% static 'websurvey/img/certificazione.png' %}" style="max-width: 120px; margin-left: 0px" />
+                        </div>
+                    <div class="clearfix"></div>
+                    &nbsp;
+                    <p class="grey-light">
+                        t33 is certified UNI EN ISO 9001:2008 for the provision of services: &ldquo;Evaluation of programs and projects, technical assistance to programs and projects, studies and research in public policy&rdquo;. Sector EA:35. Certificate n. 30700250 QM08.
+                    </p>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-2">
+                        <h6 class="heading white margin-bottom-extrasmall">Follow us on</h6>
+                        <ul class="info">
+                            <li><a href="http://twitter.com/#!/t33srl" target="_blank"><i class="i fa fa-twitter-square"></i> Twitter</a></li>
+                            <li><a href="http://www.linkedin.com/company/750600" target="_blank"><i class="i fa fa-linkedin-square"></i> Linkedin</a></li>
+                            <li><a href="http://www.facebook.com/pages/T33-Srl/360050140677216?sk=info" target="_blank"><i class="i fa fa-facebook-square"></i> Facebook</a></li>
+                        </ul>
+                        <hr />
+                        <h6 class="heading white margin-bottom-extrasmall">Disclaimer</h6>
+                        <ul class="info">
+                            <li><a target="_blank" href="https://www.t33.it/en/privacy-policy.html">Privacy Policy</a></li>
+                            <li><a target="_blank" href="https://www.t33.it/en/cookie-policy.html">Cookie Policy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-3">
+                        <h6 class="heading white margin-bottom-extrasmall">Contact Us</h6>
+                        <ul class="info">
+                            <li>Mail: <a href="mailto:info@t33.it">info@t33.it</a><br />
+                                Certified Mail: <a href="mailto:t33@pec.it">t33@pec.it</a></li>
+                        </ul>
+                        <hr />
+                        <ul class="info">
+                            <li>Phone <a href="tel:+390719715460">+39.071.9715460</a><br />
+                                Fax <a href="tel:+390719203380">+39.071.9715461 -&nbsp;+39.071.9203380 </a></li>
+                        </ul>
+                        <hr />
+                        <ul class="info">
+                            <li>Via Calatafimi 1<br />
+                                60121 Ancona, Italy</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="copy col-md-12 padding-left-null">
+                    &copy; t33 srl - All rights reserved - CF/P.IVA 02343620429<a class="anchor" href="#main-wrap" id="backtotop">Back to top</a>
+                </div>
+            </footer>
+        </div>
+        {% block js %}
+
+        <script>
+            //shows the ended surveys section
+            $( "button:first" ).click(function() {
+              $( "#endedsurveys" ).toggle( "slow" );
+              $(this).text( $(this).text() == 'Hide List' ? 'Show List' : 'Hide List' );
+            });
+        </script>
+
+        {% endblock js %}
+    </body>
+</html>

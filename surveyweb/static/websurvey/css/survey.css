@@ -1,0 +1,221 @@
+/*!
+* Css Added for Local Surveys
+*/
+
+/* Set of color variables for the theme */
+
+:root{
+  --main-blue: #009EE0;
+  --light-blue: #56DFD6;
+  --main-white: #FFF;
+}
+
+/* Set font-size based on screen size */
+
+
+@media screen and (min-width: 1920px) {
+  .container{
+    font-size: 150% !important;
+  }
+}
+
+@media screen and (max-width: 1920px) {
+  .container{
+    font-size: 130% !important;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .container{
+    font-size: 120% !important;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .container{
+    font-size: 110% !important;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .container{
+    font-size: 100% !important;
+  }
+}
+
+@media screen and (max-width: 570px) {
+  .container{
+    font-size: 80% !important;
+  }
+}
+
+/* General */
+
+.panel-heading.card-header{
+  background-color: var(--main-blue);
+  border-radius: 0%;
+}
+
+.panel-heading.card-header h3{
+  font-size: 2em;
+  text-align: left;
+  color: var(--main-white);
+}
+
+h2{
+  display: block;
+  font-size: 1.8em;
+  -webkit-margin-before: 0.83em;
+  -webkit-margin-after: 0.83em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  font-weight: bold;
+}
+
+h4{
+  display: block;
+  -webkit-margin-before: 1.33em;
+  -webkit-margin-after: 1.33em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  font-weight: bold;
+  font-size: 1em;
+  margin: 1.5em 0 0 0;
+}
+
+h5{
+  display: block;
+  font-size: 1em;
+  -webkit-margin-before: 1.67em;
+  -webkit-margin-after: 1.67em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  font-weight: bold;
+  margin: 1em 0;
+}
+
+p{
+  display: block;
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+}
+
+.sv_qstn{
+  border-bottom: 1px solid var(--main-blue);
+}
+
+.sv_qstn input[type=text]{
+  position: relative;
+  height: 2.3em;
+  word-break: break-all;
+}
+
+
+.sv_qstn input[type=radio]{
+  position: relative;
+  margin-right: 0.3em;
+  width: 1.1em;
+  height: 1.1em;
+  vertical-align: middle;
+  font-size: 0.8em;
+  margin-top: -0.1em;
+}
+
+.sv_qstn input[type=checkbox]{
+  position: relative;
+  margin-right: 0.3em;
+  width: 1.1em;
+  height: 1.1em;
+  vertical-align: middle;
+  font-size: 0.8em;
+  margin-top: -0.1em;
+}
+
+.progress{
+  width: 100%;
+  height: 1.2em;
+}
+
+.progress-bar{
+  background-image: linear-gradient(to right,var(--light-blue) 0,var(--main-blue) 100%);
+  font-size: 0.8em;
+  line-height: 1.6em;
+}
+
+.panel-footer.card-footer{
+  padding: 1em 0;
+  min-height: 1.5em;
+  border-top: 1px solid var(--main-blue);
+  background-color: var(--main-white);
+  display: block;
+}
+
+.panel-footer.card-footer input[type=button]{
+  color: white;
+  background-color: var(--main-blue);
+  font-size: 0.85em;
+  font-weight: bold;
+  line-height: 2em;
+  border: none;
+  min-width: 100px;
+  cursor: pointer;
+  padding: 0 2em;
+  border-radius: 2px;
+}
+
+.panel-footer.card-footer .sv_next_btn{
+  float:right;
+}
+
+.panel-footer.card-footer input[type=button]:hover{
+  background-color: var(--light-blue);
+}
+
+/* Section 3 Specific */
+
+#sq_115 ul{
+  display: block;
+  list-style-type: disc;
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  -webkit-padding-start: 40px;
+}
+
+#sq_115 ul li{
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+
+/* Section Footer Specific */
+
+#sq_242 a:-webkit-any-link {
+  color: -webkit-link;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Extra css */
+
+#CodeError{
+    display: none;
+}
+
+#AjaxError{
+    display: none;
+}
+#SavingError{
+    display: none;
+}
+
+.ended{
+    margin: 3em 2em;
+    background-color: var(--main-blue);
+    font-size: 2em;
+    text-align: left;
+    color: var(--main-white);
+    text-align: center;
+}

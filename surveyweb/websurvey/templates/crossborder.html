@@ -1,0 +1,113 @@
+{% extends "Home.html" %}
+{% load static %}
+
+{% block title %}WEB SURVEY CROSS BORDER COOPERATION{% endblock title %}
+{% block css %}
+
+<link rel="stylesheet" href="{% static 'websurvey/css/survey.css' %}" />
+
+{% endblock css %}
+
+{% block content %}
+
+    <div id="AccessPopUp" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title color">Cross Border Cooperation Authentication</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Insert the access code you have been provided in order to access the survey:</p>
+                    <form action="{% url 'check' %}" id="AccessForm" method="post" class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label id="lblAccess" class="col-sm-3 control-label" for="access">Access Code</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="AccessCode" class="form-control" id="access" placeholder="Insert Code Here"/>
+                            </div>
+                            <div class="col-sm-3">
+                                <small id="CodeError" class="text-danger">
+                                    Invalid Code
+                                </small>
+                                <small id="AjaxError" class="text-danger">
+                                    Server Not Responding - Try Again Later
+                                </small>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Access</button>
+                            <button type="submit" class="btn btn-default">
+                                <a style="text-decoration: none;" href="{% url 'home' %}">Go Back</a>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="surveyContainer"></div>
+    <div id="SavingError" class="row" align="center">
+        <p class="col-md-12 text-danger">
+            There was an error while saving your survey on our server. We are sorry for the inconvenience, please try again.
+        </p>
+        <button class="btn btn-primary">
+            <a style="color: white; text-decoration: none;" href="{% url 'crossborder' %}">Start the survey again</a>
+        </button>
+    </div>
+{% endblock content %}
+
+{% block js %}
+
+    <script type="text/javascript" src="{% static 'websurvey/js/lib_surveyjs_jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'websurvey/js/js_cookie.js' %}"></script>
+    <script type="text/javascript" src="{% static 'websurvey/js/survey.js' %}"></script>
+    <script type="text/javascript">
+
+        //shows the initial popup
+        $( document ).ready(function() {
+            if(Cookies.get('crossborder')!='Allowed' || Cookies.get('crossborder')==undefined){ //read the cookie to check if the user already inserted the access code
+                $('#AccessPopUp').modal({backdrop: 'static', keyboard: false},'show');
+            }
+            if(Cookies.get('WEB SURVEY CROSS BORDER')=='true'){ //read the cookie to check if the user already ended the survey
+                $('.panel-body.card-block.mt-4').addClass("ended");
+            }
+        });
+
+        //on form submit calls the function to send input to the server
+        $('#AccessForm').on('submit', function(event){
+            event.preventDefault();
+            check_key($('#AccessForm').find('input[name="AccessCode"]').val());
+        });
+
+        //sends input to the server with an ajax request and checks if the key inserted is correct
+        function check_key(AccessCode){
+            $.ajax({
+                url : "{% url 'check' %}", // the endpoint
+                type : "POST", // http method
+                data : { csrfmiddlewaretoken: "{{ csrf_token }}", key : AccessCode , survey : "Cross Border" }, // data sent ( key + name of the survey)
+                dataType: 'json',
+                success : function(json) {
+                    if(json["msg"]=="Found"){
+                        $('#AccessPopUp').modal('toggle'); // hide the modal
+                        Cookies.set('crossborder', 'Allowed', { expires: 7, path: '/crossborder/' }); //creates the cookie that lasts 7 days
+                    } else {
+                        $('#CodeError').show();
+                        $('#AjaxError').hide();
+                        $('#lblAccess').addClass("text-danger");
+                        $('#AccessForm').addClass("has-error");
+                    }
+                },
+
+                error : function err() {
+                    $('#CodeError').hide()
+                    $('#AjaxError').show();
+                    $('#lblAccess').addClass("text-danger");
+                    $('#AccessForm').addClass("has-error");
+                }
+            });
+        };
+
+    </script>
+
+{% endblock js %}
